@@ -35,14 +35,14 @@ public class Block {
 	 */
 	public Block(String hashPrecedent) {
 		this.hashPrecedent = hashPrecedent;
-		Nonce = 0;
-		date = new Date();
+		this.Nonce = 0;
+		this.date = new Date(); //Date au moment de la creation d'un block
 		
 		Random random = new Random();
-		this.nbTransaction = random.nextInt(10)+1;
+		this.nbTransaction = random.nextInt(10)+1; //Genere un nombre aleatoire de transaction
 		this.listeTransaction = new String[nbTransaction];
 		for (int i=0; i<this.nbTransaction; i++ ) {
-			listeTransaction[i] = generateTransaction();
+			listeTransaction[i] = generateTransaction(); // Met nbTransaction dans le tableau
 		}
 		// faire le merkel des transaction
 		merkel = "846047930ee9b51c10e438ff3a2ad25c7eca5b890213b4e77d12012cc307017c0";
@@ -58,9 +58,9 @@ public class Block {
 		Random random = new Random();
 		String name1 = tab[random.nextInt(tablength)];
 		String name2= tab[random.nextInt(tablength)];
-		int Bnb = random.nextInt(1000);
+		int Bnb = random.nextInt(1000)+1; //genere un montant pour la transaction entre 1 et 1000
 		
-		while (name1 == name2) {
+		while (name1 == name2) { //Verifie que les deux nom soit different 
 			name2 = tab[random.nextInt(tablength)];
 		}
 		return (name1 + " envoie " + Bnb +" Bnb à " + name2);
@@ -129,4 +129,10 @@ public class Block {
 	public String getMerkel() {
 		return merkel;
 	}
+	
+	
+	
 }	
+	
+	
+
