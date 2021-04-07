@@ -19,6 +19,10 @@ public class BlockChaine {
 		return genesis;
 	}
 	
+	/**
+	 * Genere un tableau de block et print des information 
+	 * @param int nombre de block dans la chaine
+	 */
 	public void boucleChaine(int longChaine) {
 		chaine[0] = createGenesis();
 		String hashPrecedent = hashBlock(chaine[0]); 
@@ -31,6 +35,11 @@ public class BlockChaine {
 		}
 	}
 	
+	/**
+	 * Hash le block en incrementant le nonce jusqu'a que le block commence par 3x "000"
+	 * @param BLock a hash
+	 * @return String Hash avec 3x "000" devant
+	 */
 	public String hashBlock(Block block) {
 		String HashP = block.getHashPrecedent();
 		String Trans = block.getMerkel();
