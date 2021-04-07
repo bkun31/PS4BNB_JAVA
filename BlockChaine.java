@@ -4,7 +4,7 @@ public class BlockChaine {
 	private Block chaine [] = new Block[100];
 	
 	/**
-	 * @param longChaine
+	 * @param 
 	 */
 	public BlockChaine() {
 	}
