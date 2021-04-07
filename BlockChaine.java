@@ -45,8 +45,8 @@ public class BlockChaine {
 		String Trans = block.getMerkel();
 		String Date = block.getDate();
 		int Nonce = 0;
-		String hash = HashUtil.applySha256(HashP + Trans + Date + Nonce);
-		while (!hash.substring(0, 3).equals("000")) {
+		String hash = HashUtil.applySha256(HashP + Trans + Date + Nonce); //Concatenation des info + hash
+		while (!hash.substring(0, 3).equals("000")) { //Verifie que les 3 premier caracter du hash soit "000"
 			Nonce++;
 			hash = HashUtil.applySha256(HashP + Trans + Date + Nonce);
 		}
@@ -54,5 +54,4 @@ public class BlockChaine {
 		block.setNonce(Nonce);
 		return hash;
 	}
-	
 }
