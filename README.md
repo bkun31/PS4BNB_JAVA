@@ -10,7 +10,4 @@ A fait :
 
 
 Question prof :
-- Echange entre utilisateur ou juste String
-- Précision : - définir la vérification de la cohérence des blocs+merkle hash
-- Précision : lecture/écriture en JSON (0pts) (avec le code fourni)
 - (C et java doivent fonctioner pareille ?)
