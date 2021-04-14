@@ -6,7 +6,7 @@ A fait :
 - Quelle hash metre en predecesseur au genesis ?
 - Modifier la limite de block de la chaine 
 - Tableau dinamyque pour la BLockChaine
-- 
+- Changer les Bnb en satoBnb
 
 
 Question prof :
