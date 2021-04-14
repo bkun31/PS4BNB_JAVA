@@ -7,6 +7,7 @@ A fait :
 - Modifier la limite de block de la chaine 
 - Tableau dinamyque pour la BLockChaine
 - Changer les Bnb en satoBnb
+- FAIRE LE JSON
 
 
 Question prof :
