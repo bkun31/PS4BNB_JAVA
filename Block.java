@@ -1,6 +1,6 @@
 package Projet;
 
-import java.util.Random;
+
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Arrays;
@@ -17,10 +17,11 @@ public class Block {
 	private int numBlock;
 	
 	/**
-	 * Contructeur avec liste de transaction
 	 * @param String hashPrecedent
 	 * @param String[] listeTransaction
 	 * @param nbTransaction : nombre de transaction
+	 * @param numBlock Numero du block dans la chain
+	 * @param User mineur du block
 	 */
 	public Block(String hashPrecedent, String[] listeTransaction, int nbTransaction, int numBlock, User user) {
 		this.hashPrecedent = hashPrecedent;
@@ -28,54 +29,16 @@ public class Block {
 		this.nbTransaction = nbTransaction;
 		this.numBlock = numBlock;
 		this.user = user;
-		Nonce = 0;
-		date = new Date();
-		// faire le merkel des transaction
-		merkel = merkel();
-	}
-	
-	/**
-	 * Contructeur avec generation aleatoire de la liste de transaction
-	 * @param String hashPrecedent
-	 */
-	public Block(String hashPrecedent) {
-		this.hashPrecedent = hashPrecedent;
 		this.Nonce = 0;
-		this.date = new Date(); //Date au moment de la creation d'un block
-		
-		Random random = new Random();
-		this.nbTransaction = random.nextInt(10)+1; //Genere un nombre aleatoire de transaction
-		this.listeTransaction = new String[nbTransaction];
-		for (int i=0; i<this.nbTransaction; i++ ) {
-			listeTransaction[i] = generateTransaction(); // Met nbTransaction dans le tableau
-		}
+		this.date = new Date();
 		// faire le merkel des transaction
-		merkel = merkel();
-		
+		this.merkel = merkel();
 	}
 
 	/**
-	 * @return String transaction aleatoire
-	 */
-	public static String generateTransaction() {
-		String[] tab = {"Alex","Damien","Paul","Pierre","Lisa","Chloé","Astèrix", "Obélix","Thomas","Clement","Steven","Bilel","Cédric","Omar","Bastien"};
-		int tablength = tab.length;
-		Random random = new Random();
-		String name1 = tab[random.nextInt(tablength)];
-		String name2= tab[random.nextInt(tablength)];
-		int Bnb = random.nextInt(1000)+1; //genere un montant pour la transaction entre 1 et 1000
-		
-		while (name1 == name2) { //Verifie que les deux nom soit different 
-			name2 = tab[random.nextInt(tablength)];
-		}
-		return (name1 + " envoie " + Bnb +" Bnb à " + name2);
-	}
-	
-	
-	/**
-	 * Hash le block en incrementant le nonce jusqu'a que le block commence par 3x "000"
+	 * Hash le block en incrementant le nonce jusqu'a que le block commence par X fois "0"
 	 * @param BLock a hash
-	 * @return String Hash avec  "0" x difficulte devant
+	 * @return String Hash du block
 	 */
 	public String hashBlock(int difficulte) {
 		String dif = "";
@@ -90,30 +53,41 @@ public class Block {
 		return hashBlock;
 	}
 	
+	/**
+	 * lance merkel hash avec les info du block
+	 * @see merkelhash()
+	 * @return String merkel
+	 */
 	public String merkel() {
 		return merkelHash(listeTransaction, nbTransaction);
 	}
 	
+	/**
+	 * @return String merkel
+	 */
 	public String merkelHash(String tabTx[], int nbTx) {
 		int i=0;
 		int nbTxHash=0;
 		String tab[] = Arrays.copyOf(tabTx, nbTx); //crée une copie de tabTx[] de longeur nbTx
 		String [] tabHash = tab;
-		if (nbTx == 1) {
+		if (nbTx == 1) { //condition de fin de recursion 
 			return tab[0];
 		}
 		while (i<nbTx-1) {
-			tabHash[nbTxHash]= HashUtil.applySha256(tab[i] + tab[i+1]);
+			tabHash[nbTxHash]= HashUtil.applySha256(tab[i] + tab[i+1]); //concatene et hash 2 transaction 
 			nbTxHash++;
 			i+=2;
 		}
 		if (nbTx % 2 != 0) {
-			tabHash[nbTxHash]= HashUtil.applySha256(tab[i] + tab[i]);
+			tabHash[nbTxHash]= HashUtil.applySha256(tab[i] + tab[i]); // Si nbTx impaire concatene et hash 2 fois la derniere transaction
 			nbTxHash++;
 		}
-		return merkelHash(tabHash, nbTxHash);
+		return merkelHash(tabHash, nbTxHash); //appel récursif de merkelhash()
 	}
 	
+	/**
+	 * @return String concatenation de toute les transaction
+	 */
 	public String stringListeTx() {
 		String liste = "";
 		for (int i=0; i<nbTransaction;i++) {
@@ -122,6 +96,9 @@ public class Block {
 		return liste;
 	}
 	
+	/**
+	 * Print toutes les info du block
+	 */
 	public void printBlock() {
 		System.out.println("Block numero (Index) : " + numBlock);
 		System.out.println("Previous hash : " + hashPrecedent);
@@ -129,11 +106,18 @@ public class Block {
 		System.out.println("Timestamp : " + dateToString(date));
 		System.out.println("Nb transaction : " + nbTransaction);
 		System.out.println("Liste transaction {");
-		System.out.println(stringListeTx());
-		System.out.println("}");
+		System.out.println(stringListeTx() + "}");
 		System.out.println("Merkel tree root : " + merkel);
 		System.out.println("Miner : " + user.getNom());
 		System.out.println("Nonce : " + Nonce);
+	}
+	
+	/**
+	 * @return true si le merkel est valide
+	 */
+	public boolean verifMerkel() {
+		//refait le merkel des transactions et verfie si il corespond au merkel du block
+		return true;
 	}
 	
 	/**
@@ -199,11 +183,6 @@ public class Block {
 	public User getUser() {
 		return user;
 	}
-	
-	
-	
-	
-	
 	
 }	
 	
