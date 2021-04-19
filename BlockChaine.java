@@ -216,14 +216,25 @@ public class BlockChain {
 	/**
 	 * @param recompence the recompence to set
 	 */
-	public void setRecompence(long recompence) {
+	public void setRecompenceBnb(int recompence) {
+		if (recompence < 0) {
+			System.out.println("recompence invalide");
+		}
+		else {
+			this.recompence = bnbToSato(recompence);
+		}
+	}
+	
+	/**
+	 * @param recompence the recompence to set
+	 */
+	public void setRecompenceSatoBnb(long recompence) {
 		if (recompence < 0) {
 			System.out.println("recompence invalide");
 		}
 		else {
 			this.recompence = recompence;
 		}
-		
 	}
 
 	/**
