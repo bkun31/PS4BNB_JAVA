@@ -4,4 +4,5 @@ A fait :
 - FAIRE LE JSON
 - boucle infini avec -1
 - Verification
+- cahnegr la generation User
 
