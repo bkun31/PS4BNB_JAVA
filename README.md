@@ -4,4 +4,5 @@ A fait :
 - Faire le Json
 - Verification chaine et merkel
 - modif rng en double
+- verif merkel 1 transaction 
 
