@@ -5,4 +5,4 @@ A fait :
 - Verification chaine et merkel
 - modif rng en double
 - verif merkel 1 transaction 
-
+- verif si blockchaine(user) user < 2
