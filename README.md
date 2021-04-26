@@ -6,3 +6,4 @@ A fait :
 - modif rng en double
 - verif merkel 1 transaction 
 - verif si blockchaine(user) user < 2
+- verif MAX_USER-1
