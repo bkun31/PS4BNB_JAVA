@@ -6,3 +6,4 @@ A fait :
 - verif merkel 1 transaction 
 - verif si blockchaine(user) user < 2
 - verif MAX_USER-1
+- verif num block
