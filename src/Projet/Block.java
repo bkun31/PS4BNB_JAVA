@@ -83,7 +83,7 @@ public class Block {
 	public String merkelHash(String tabTx[], int nbTx) {
 		int i=0;
 		int nbTxHash=0;
-		String tab[] = Arrays.copyOf(tabTx, nbTx); //crée une copie de tabTx[] de longeur nbTx
+		String tab[] = Arrays.copyOf(tabTx, nbTx); //crÃ©e une copie de tabTx[] de longeur nbTx
 		String [] tabHash = tab;
 		if (nbTx == 1) { //condition de fin de recursion 
 			return tab[0];
@@ -97,7 +97,7 @@ public class Block {
 			tabHash[nbTxHash]= HashUtil.applySha256(tab[i] + tab[i]); // Si nbTx impaire concatene et hash 2 fois la derniere transaction
 			nbTxHash++;
 		}
-		return merkelHash(tabHash, nbTxHash); //appel récursif de merkelhash()
+		return merkelHash(tabHash, nbTxHash); //appel rÃ©cursif de merkelhash()
 	}
 	
 	/**
