@@ -10,11 +10,6 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.ArrayList;
 
-/**
- * @author Bastien Canto bastien.canto@univ-tlse3.fr
- * @author Omar Kired omar.kired@univ-tlse3.fr
- */
-
 public class BlockChain {
 	//constante
 	private static final int NB_TRANSACTION_MAX = 10;
@@ -64,15 +59,15 @@ public class BlockChain {
 	 * @return Block genesis
 	 */
 	private Block createGenesis() {
-		String [] tab = new String[1]; // Crée un tableau de 1 transaction
-		tab[0] = "Coinbase envoie 50 Bnb à creator";
+		String [] tab = new String[1]; // CrÃ©e un tableau de 1 transaction
+		tab[0] = "Coinbase envoie 50 Bnb Ã  creator";
 		User user = new User("Creator");
 		Block genesis = new Block("0000000000000000000000000000000", tab, 1, 0, user);
 		return genesis;
 	}
 	
 	/**
-	 * Crée le genesis, fait l'helicopere money, phase de marché et print les block 
+	 * CrÃ©e le genesis, fait l'helicopere money, phase de marchÃ© et print les block 
 	 */
 	public void start() {
 		System.out.println("Difficulty = " + difficulte);
@@ -84,28 +79,28 @@ public class BlockChain {
 		block.hashBlock(difficulte);  //hash le genesis
 		chaine.add(block); //met le genesis en position 0 dans la blockchaine
 		numBlock++;
-		System.out.println("Block Mined!!! : " + block.getHashBlock() + " n° : " + block.getNumBlock() + " Nonce = " + block.getNonce());
+		System.out.println("Block Mined!!! : " + block.getHashBlock() + " nÂ° : " + block.getNumBlock() + " Nonce = " + block.getNonce());
 		
 		// --------------- Helico ----------------
 		
-		System.out.println("----------------- Hélicoptère -----------------");
+		System.out.println("----------------- HÃ©licoptÃ¨re -----------------");
 		Random random = new Random();
 		//Helico pour tout les user
 		for (int i = 0; i<nbUser && numBlock<=blockMax; i++) {
-			// Crée un tableau de 1 transaction
+			// CrÃ©e un tableau de 1 transaction
 			String [] tab = new String[1]; 
-			tab[0] = "Coinbase envoie 50 Bnb à " + listeUser[i].getNom();
+			tab[0] = "Coinbase envoie 50 Bnb Ã  " + listeUser[i].getNom();
 			//creation et hash block
 			block = new Block(chaine.get(numBlock-1).getHashBlock(), tab, 1, numBlock, listeUser[random.nextInt(nbUser)]);
 			block.hashBlock(difficulte);
 			chaine.add(block);
 			numBlock++;
-			System.out.println("Block Mined!!! : " + block.getHashBlock() + " n° : " + block.getNumBlock() + " Nonce = " + block.getNonce());
+			System.out.println("Block Mined!!! : " + block.getHashBlock() + " nÂ° : " + block.getNumBlock() + " Nonce = " + block.getNonce());
 		}
 		
 		// --------------- Inflation ----------------
 		
-		System.out.println("----------------- Marché -----------------");
+		System.out.println("----------------- MarchÃ© -----------------");
 		while(numBlock <= blockMax || blockMax == -1) {
 			//div recompence 
 			if (recompence != 0) {
@@ -151,7 +146,7 @@ public class BlockChain {
 		}
 		//Si en phase d'inflation ajouter a recompence
 		if (recompence != 0) {  
-			tabTx[i] = "Coinbase envoie 50 Bnb à " + user.getNom();
+			tabTx[i] = "Coinbase envoie 50 Bnb Ã  " + user.getNom();
 			nbTx++;
 		}
 		//creation et hash block
@@ -159,22 +154,21 @@ public class BlockChain {
 		block.hashBlock(difficulte);
 		chaine.add(block);
 		numBlock++;
-		System.out.println("Block Mined!!! : " + block.getHashBlock() + " n° : " + block.getNumBlock() + " Nonce = " + block.getNonce());
+		System.out.println("Block Mined!!! : " + block.getHashBlock() + " nÂ° : " + block.getNumBlock() + " Nonce = " + block.getNonce());
 	}
 	
 	/**
-	 * @return String transaction aléatoire entre 2 utilisateurs
+	 * @return String transaction alÃ©atoire entre 2 utilisateurs
 	 */
 	public String generateTransaction() {
 		Random random = new Random();
 		String name1 = listeUser[random.nextInt(nbUser)].getNom();
 		String name2 = listeUser[random.nextInt(nbUser)].getNom();
-		long satobnb = MIN_TX + (long) (Math.random() * (MAX_TX - MIN_TX)); // genere un montant pour la transaction
-																			// entre MIN_TX et MAX_TX
+		long satobnb = MIN_TX + (long) (Math.random() * (MAX_TX - MIN_TX)); // genere un montant pour la transaction entre MIN_TX et MAX_TX
 		while (name1 == name2) { // Verifie que les deux nom soit different
 			name2 = listeUser[random.nextInt(nbUser)].getNom();
 		}
-		return (name1 + " envoie " + satobnb + " satoBnb à " + name2);
+		return (name1 + " envoie " + satobnb + " satoBnb Ã  " + name2);
 	}
 	
 	
@@ -231,7 +225,7 @@ public class BlockChain {
 	 */
 	public void setDifficulte(int difficulte) {
 		if (difficulte > 32 || difficulte < 0) {
-			System.out.println("Difficulté invalide");
+			System.out.println("DifficultÃ© invalide");
 		}
 		else {
 			this.difficulte = difficulte;
